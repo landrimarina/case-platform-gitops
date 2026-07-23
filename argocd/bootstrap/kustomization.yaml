@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - case-platform-project.yaml
+  - cloudnative-pg-operator.yaml
