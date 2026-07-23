@@ -8,9 +8,12 @@ spec:
 
   sourceRepos:
     - https://github.com/landrimarina/case-platform-gitops.git
+    - https://cloudnative-pg.github.io/charts
 
   destinations:
     - namespace: argocd
+      server: https://kubernetes.default.svc
+    - namespace: cnpg-system
       server: https://kubernetes.default.svc
     - namespace: keycloak
       server: https://kubernetes.default.svc
