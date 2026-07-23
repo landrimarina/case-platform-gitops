@@ -1,0 +1,21 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: case-platform-postgresql
+spec:
+  description: Cluster PostgreSQL della Case Platform
+
+  instances: 1
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.6-system-trixie
+
+  enableSuperuserAccess: false
+
+  bootstrap:
+    initdb:
+      database: keycloak
+      owner: keycloak
+      encoding: UTF8
+
+  storage:
+    size: 10Gi

@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: case-platform-postgresql
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: case-platform
+
+  source:
+    repoURL: https://github.com/landrimarina/case-platform-gitops.git
+    targetRevision: develop
+    path: applications/platform/data/postgresql/overlays/local
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: case-platform-data
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
