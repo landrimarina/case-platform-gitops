@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: case-platform-keycloak-instance
+  namespace: argocd
+
+spec:
+  project: case-platform
+
+  source:
+    repoURL: https://github.com/landrimarina/case-platform-gitops.git
+    targetRevision: develop
+    path: applications/platform/keycloak/instance
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloak
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
