@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: case-platform-keycloak-operator
+  namespace: argocd
+
+spec:
+  project: case-platform
+
+  source:
+    repoURL: https://cloudnative-pg.github.io/charts
+    targetRevision: develop
+    path: applications/platform/keycloak/operator
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloack
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
