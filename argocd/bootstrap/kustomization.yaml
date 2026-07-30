@@ -5,4 +5,4 @@ resources:
   - case-platform-project.yaml
   - cloudnative-pg-operator.yaml
   - postgresql.yaml
-  
+  - keycloak-operator.yaml
