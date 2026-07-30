@@ -8,7 +8,7 @@ spec:
   project: case-platform
 
   source:
-    repoURL: https://cloudnative-pg.github.io/charts
+    repoURL: https://github.com/landrimarina/case-platform-gitops.git
     targetRevision: develop
     path: applications/platform/keycloak/operator
 
