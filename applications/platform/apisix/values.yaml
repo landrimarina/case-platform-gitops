@@ -1,0 +1,26 @@
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+service:
+  type: ClusterIP
+
+admin:
+  enabled: true
+  type: ClusterIP
+  enable_admin_ui: false
+
+etcd:
+  enabled: true
+  replicaCount: 1
+
+ingress-controller:
+  enabled: true
+  webhook:
+    enabled: false

@@ -7,3 +7,4 @@ resources:
   - postgresql.yaml
   - keycloak-operator.yaml
   - keycloak-instance.yaml
+  - apisix.yaml
