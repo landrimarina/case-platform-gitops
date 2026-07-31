@@ -19,6 +19,8 @@ admin:
 etcd:
   enabled: true
   replicaCount: 1
+  preUpgradeJob:
+  enabled: false
 
 ingress-controller:
   enabled: true
