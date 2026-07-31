@@ -9,6 +9,7 @@ spec:
   sourceRepos:
     - https://github.com/landrimarina/case-platform-gitops.git
     - https://cloudnative-pg.github.io/charts
+    - https://apache.github.io/apisix-helm-chart
 
   destinations:
     - namespace: argocd
@@ -22,6 +23,8 @@ spec:
     - namespace: case-platform
       server: https://kubernetes.default.svc
     - namespace: case-platform-anc
+      server: https://kubernetes.default.svc
+    - namespace: apisix
       server: https://kubernetes.default.svc
 
   clusterResourceWhitelist:
