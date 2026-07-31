@@ -19,9 +19,14 @@ admin:
 etcd:
   enabled: true
   replicaCount: 1
-  preUpgradeJob:
-  enabled: false
+  preUpgradeJob:  
+    enabled: false
 
+externalEtcd:
+  host:
+    - http://case-platform-apisix-etcd.apisix.svc.cluster.local:2379
+  user: ""
+  
 ingress-controller:
   enabled: true
   webhook:
