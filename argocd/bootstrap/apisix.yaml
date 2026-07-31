@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apisix
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: case-platform
+
+  sources:
+    - repoURL: https://apache.github.io/apisix-helm-chart
+      chart: apisix
+      targetRevision: 2.16.0
+      helm:
+        releaseName: case-platform-apisix
+        valueFiles:
+          - $values/applications/platform/apisix/values.yaml
+
+    - repoURL: https://github.com/landrimarina/case-platform-gitops.git
+      targetRevision: develop
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: apisix
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
