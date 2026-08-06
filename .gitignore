@@ -17,3 +17,5 @@ coverage/
 .env.local
 *.local
 *.log
+
+case-platform-pgcc/scripts/secrets.env
