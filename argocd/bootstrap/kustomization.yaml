@@ -8,3 +8,4 @@ resources:
   - keycloak-operator.yaml
   - keycloak-instance.yaml
   - apisix.yaml
+  - bff.yaml

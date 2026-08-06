@@ -1,0 +1,5 @@
+apiVersion: v2
+name: platform-backend
+description: Chart generico per i servizi backend della Case Platform
+type: application
+version: 0.1.0

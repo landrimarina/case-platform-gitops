@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: case-platform-bff
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: case-platform
+
+  sources:
+    - repoURL: https://github.com/landrimarina/case-platform-gitops.git
+      targetRevision: develop
+      path: helm/platform-backend
+      helm:
+        releaseName: case-platform-bff
+        valueFiles:
+          - $values/applications/platform/bff/values.yaml
+
+    - repoURL: https://github.com/landrimarina/case-platform-gitops.git
+      targetRevision: develop
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: case-platform
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

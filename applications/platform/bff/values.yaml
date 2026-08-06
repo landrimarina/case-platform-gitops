@@ -1,0 +1,39 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/landrimarina/case-platform-bff
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8081
+
+probes:
+  liveness:
+    path: /q/health/live
+  readiness:
+    path: /q/health/ready
+
+env:
+  - name: BFF_OIDC_AUTH_SERVER_URL
+    value: "http://case-platform-keycloak-service.keycloak.svc.cluster.local:8080/realms/case-platform"
+  - name: SHELL_URL
+    value: "http://case-platform-frontend.case-platform.svc.cluster.local"
+
+# client-id e client-secret provengono da un Secret K8s pre-esistente creato manualmente
+envFromSecret:
+  - name: BFF_OIDC_CLIENT_ID
+    secretName: bff-oidc-secret
+    secretKey: client-id
+  - name: BFF_OIDC_CLIENT_SECRET
+    secretName: bff-oidc-secret
+    secretKey: client-secret
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
