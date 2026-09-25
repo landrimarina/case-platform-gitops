@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: case-platform-shell
+  namespace: argocd
+spec:
+  project: case-platform
+
+  sources:
+    - repoURL: https://github.com/landrimarina/case-platform-gitops.git
+      targetRevision: develop
+      path: helm/platform-frontend
+      helm:
+        releaseName: case-platform-shell
+        valueFiles:
+          - $values/applications/platform/frontend/values.yaml
+
+    - repoURL: https://github.com/landrimarina/case-platform-gitops.git
+      targetRevision: develop
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: case-platform
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

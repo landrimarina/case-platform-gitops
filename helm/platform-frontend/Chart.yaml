@@ -1,0 +1,5 @@
+apiVersion: v2
+name: platform-frontend
+description: Chart Helm per la Shell della Case Platform
+type: application
+version: 0.1.0

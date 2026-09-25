@@ -1,0 +1,6 @@
+# Il tag è quello mostrato nello screenshot del package
+replicaCount: 1
+
+image:
+  repository: ghcr.io/landrimarina/case-platform-shell
+  tag: "7bfa1a33e03fa8496c07bd28cf1a59010832f883"
