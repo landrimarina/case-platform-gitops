@@ -33,7 +33,8 @@ ingress-controller:
     enabled: false
   gatewayProxy:
     createDefault: true
-    apisix:
-  adminService:
-    name: case-platform-apisix-admin
-    namespace: apisix
+    provider:
+      controlPlane:
+        service:
+          name: case-platform-apisix-admin
+          port: 9180
