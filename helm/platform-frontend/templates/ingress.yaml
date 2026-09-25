@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: case-platform-shell
+spec:
+  ingressClassName: apisix
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: case-platform-shell
+                port:
+                  number: 80
