@@ -33,3 +33,7 @@ ingress-controller:
     enabled: false
   gatewayProxy:
     createDefault: true
+    apisix:
+  adminService:
+    name: case-platform-apisix-admin
+    namespace: apisix
