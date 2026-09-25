@@ -31,3 +31,5 @@ ingress-controller:
   enabled: true
   webhook:
     enabled: false
+  gatewayProxy:
+    createDefault: true
