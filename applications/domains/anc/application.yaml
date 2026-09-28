@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: case-platform-anc
+  namespace: argocd
+spec:
+  project: case-platform
+
+  source:
+    repoURL: https://github.com/landrimarina/case-platform-gitops.git
+    targetRevision: develop
+    path: helm/domain-application
+    helm:
+      releaseName: anc
+      valueFiles:
+        - values-anc.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: case-platform-anc
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

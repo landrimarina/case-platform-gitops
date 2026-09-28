@@ -7,7 +7,8 @@ resources:
   limits:
     cpu: 500m
     memory: 512Mi
-
+# service.type: NodePort dice al chart di esporre l’ingresso di APISIX con un Service di tipo NodePort. 
+# Poi: il chart creerà automaticamente un Service di tipo NodePort per esporre l’ingresso di APISIX.
 service:
   type: NodePort
 
