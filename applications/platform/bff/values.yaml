@@ -5,7 +5,7 @@ imagePullSecrets:
   
 image:
   repository: ghcr.io/landrimarina/case-platform-bff
-  tag: latest
+  tag: "de7d12fefec6827b164472755754837b11bcad37"
 
 service:
   type: ClusterIP
