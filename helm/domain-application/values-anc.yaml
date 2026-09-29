@@ -1,6 +1,6 @@
 frontend:
   image:
-    repository: "ghcr.io/landrimarina/case-platform-anc"
+    repository: "ghcr.io/landrimarina/case-platform-mfe-anc"
     tag: "090ee21576f1e674fc02d76ebfdcb2ef760c8d05"
   ingress:
     path: /anc

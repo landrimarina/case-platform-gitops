@@ -6,6 +6,9 @@ metadata:
 spec:
   project: case-platform
 
+# Argo CD dice a Helm: «usa il chart in helm/domain-application, carica il 
+# suo values.yaml e applica sopra values-anc.yaml». Il percorso di valueFiles è 
+# relativo alla cartella del chart.
   source:
     repoURL: https://github.com/landrimarina/case-platform-gitops.git
     targetRevision: develop
