@@ -15,6 +15,10 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
+      imagePullSecrets:
+        # {{- range .Values.imagePullSecrets }}
+        - name: {{ .name | quote }}
+        # {{- end }}
       containers:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -22,19 +26,24 @@ spec:
           ports:
             - containerPort: {{ .Values.service.targetPort }}
           env:
-            {{- range .Values.env }}
+            # {{- range .Values.env }}
             - name: {{ .name }}
               value: {{ .value | quote }}
-            {{- end }}
-            {{- range .Values.envFromSecret }}
+            # {{- end }}
+            # {{- range .Values.envFromSecret }}
             - name: {{ .name }}
               valueFrom:
                 secretKeyRef:
                   name: {{ .secretName }}
                   key: {{ .secretKey }}
-            {{- end }}
+            # {{- end }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            limits:
+              cpu: {{ .Values.resources.limits.cpu | quote }}
+              memory: {{ .Values.resources.limits.memory | quote }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu | quote }}
+              memory: {{ .Values.resources.requests.memory | quote }}
           livenessProbe:
             httpGet:
               path: {{ .Values.probes.liveness.path }}

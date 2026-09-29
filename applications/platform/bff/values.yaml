@@ -1,5 +1,8 @@
 replicaCount: 1
 
+imagePullSecrets:
+  - name: ghcr-pull
+  
 image:
   repository: ghcr.io/landrimarina/case-platform-bff
   tag: latest
