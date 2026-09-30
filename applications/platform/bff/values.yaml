@@ -41,6 +41,6 @@ resources:
     cpu: 500m
     memory: 512Mi
   
-  ingress:
+ingress:
   enabled: true
   path: /api
