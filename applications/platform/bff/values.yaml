@@ -44,3 +44,4 @@ resources:
 ingress:
   enabled: true
   path: /api
+  callbackPath: /auth/callback
