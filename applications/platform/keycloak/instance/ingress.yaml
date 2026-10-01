@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: case-platform-keycloak
+  namespace: keycloak
+spec:
+  ingressClassName: apisix
+  rules:
+    - http:
+        paths:
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: case-platform-keycloak-service
+                port:
+                  number: 8080

@@ -20,7 +20,7 @@ probes:
 
 env:
   - name: BFF_OIDC_AUTH_SERVER_URL
-    value: "http://case-platform-keycloak-service.keycloak.svc.cluster.local:8080/realms/case-platform"
+    value: "http://case-platform-keycloak-service.keycloak.svc.cluster.local:8080/auth/realms/case-platform"
   - name: SHELL_URL
     value: "http://case-platform-frontend.case-platform.svc.cluster.local"
 
