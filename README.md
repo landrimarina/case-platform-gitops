@@ -33,6 +33,10 @@ Immagini frontend attese:
 - `ghcr.io/landrimarina/case-platform-anc-mfe`
 - `ghcr.io/landrimarina/case-platform-pgcc-mfe`
 
+### Health Ingress su Argo CD (APISIX)
+
+È inclusa una custom health check Argo CD per `networking.k8s.io/Ingress` in [argocd-cm-health-customizations.yaml](./argocd/bootstrap/argocd-cm-health-customizations.yaml), per considerare `Healthy` gli ingress con `ingressClassName: apisix` anche quando `status.loadBalancer` resta vuoto.
+
 ### Configurazione values per dominio
 
 - ANC backend: [applications/domains/anc/backend/values.yaml](./applications/domains/anc/backend/values.yaml)
