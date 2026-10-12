@@ -14,9 +14,9 @@ service:
 
 probes:
   liveness:
-    path: /q/health/live
+    path: /api/anc/home
   readiness:
-    path: /q/health/ready
+    path: /api/anc/home
 
 env: []
 envFromSecret: []
