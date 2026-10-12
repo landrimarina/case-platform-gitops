@@ -2,6 +2,6 @@ frontend:
   replicaCount: 1
   image:
     repository: "ghcr.io/landrimarina/case-platform-anc-mfe"
-    tag: "090ee21576f1e674fc02d76ebfdcb2ef760c8d05"
+    tag: "latest"
   ingress:
     path: /anc
