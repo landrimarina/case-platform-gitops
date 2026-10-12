@@ -39,3 +39,11 @@ ingress-controller:
         service:
           name: case-platform-apisix-admin
           port: 9180
+
+apisix:
+  nginx:
+    configurationSnippet:
+      httpSrv: |
+        proxy_buffer_size 32k;
+        proxy_buffers 8 32k;
+        proxy_busy_buffers_size 64k;
