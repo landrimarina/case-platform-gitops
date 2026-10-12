@@ -39,11 +39,25 @@ spec:
             chartPath: helm/domain-application
             releaseName: anc
             valuesPath: applications/domains/anc/frontend/values.yaml
+            imageAlias: ancmfe
+            imageRepository: ghcr.io/landrimarina/case-platform-anc-mfe
           - appName: case-platform-pgcc-frontend
             namespace: case-platform-pgcc
             chartPath: helm/domain-application
             releaseName: pgcc
             valuesPath: applications/domains/pgcc/frontend/values.yaml
+            imageAlias: pgccmfe
+            imageRepository: ghcr.io/landrimarina/case-platform-pgcc-mfe
+      template:
+        metadata:
+          annotations:
+            argocd-image-updater.argoproj.io/image-list: "{{ .imageAlias }}={{ .imageRepository }}"
+            argocd-image-updater.argoproj.io/{{ .imageAlias }}.update-strategy: digest
+            argocd-image-updater.argoproj.io/{{ .imageAlias }}.allow-tags: regexp:^latest$
+            argocd-image-updater.argoproj.io/{{ .imageAlias }}.helm.image-name: frontend.image.repository
+            argocd-image-updater.argoproj.io/{{ .imageAlias }}.helm.image-tag: frontend.image.tag
+            argocd-image-updater.argoproj.io/write-back-method: git
+            argocd-image-updater.argoproj.io/write-back-target: "helmvalues:{{ .valuesPath }}"
   template:
     metadata:
       name: "{{ .appName }}"

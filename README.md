@@ -17,7 +17,8 @@ Tutte le applicazioni usano:
 
 Quindi ogni push su `develop` del repository GitOps viene rilevato da Argo CD e avvia il deploy dei componenti coinvolti.
 
-Per i backend dominio ANC/PGCC è configurato anche Argo CD Image Updater con strategia `digest` sul tag `latest`: quando GHCR aggiorna `latest`, Image Updater aggiorna i values Helm e innesca il nuovo sync.
+Per backend e frontend dominio ANC/PGCC è configurato anche Argo CD Image Updater con strategia `digest` sul tag `latest`: quando GHCR aggiorna `latest`, Image Updater aggiorna i values Helm e innesca il nuovo sync.
+Lo stesso comportamento è configurato anche per la Shell (`case-platform-shell`), sempre con strategia `digest` sul tag `latest`.
 Le immagini backend attese sono:
 
 - `ghcr.io/landrimarina/case-platform-anc-backend:latest`

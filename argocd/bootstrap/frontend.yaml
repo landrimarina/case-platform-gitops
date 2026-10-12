@@ -3,6 +3,14 @@ kind: Application
 metadata:
   name: case-platform-shell
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: shell=ghcr.io/landrimarina/case-platform-shell
+    argocd-image-updater.argoproj.io/shell.update-strategy: digest
+    argocd-image-updater.argoproj.io/shell.allow-tags: regexp:^latest$
+    argocd-image-updater.argoproj.io/shell.helm.image-name: image.repository
+    argocd-image-updater.argoproj.io/shell.helm.image-tag: image.tag
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/write-back-target: helmvalues:applications/platform/frontend/values.yaml
 spec:
   project: case-platform
 
