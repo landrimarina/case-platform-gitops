@@ -4,7 +4,7 @@ imagePullSecrets:
   - name: ghcr-pull
 
 image:
-  repository: ghcr.io/landrimarina/case-platform-anc
+  repository: ghcr.io/landrimarina/case-platform-anc-backend
   tag: "latest"
 
 service:

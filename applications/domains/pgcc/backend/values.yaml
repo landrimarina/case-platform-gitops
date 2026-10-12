@@ -4,7 +4,7 @@ imagePullSecrets:
   - name: ghcr-pull
 
 image:
-  repository: ghcr.io/landrimarina/case-platform-pgcc
+  repository: ghcr.io/landrimarina/case-platform-pgcc-backend
   tag: "latest"
 
 service:

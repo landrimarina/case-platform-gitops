@@ -13,16 +13,32 @@ spec:
             chartPath: helm/platform-backend
             releaseName: case-platform-anc-backend
             valuesPath: applications/domains/anc/backend/values.yaml
-          - appName: case-platform-anc-frontend
-            namespace: case-platform-anc
-            chartPath: helm/domain-application
-            releaseName: anc
-            valuesPath: applications/domains/anc/frontend/values.yaml
+            imageAlias: anc
+            imageRepository: ghcr.io/landrimarina/case-platform-anc-backend
           - appName: case-platform-pgcc-backend
             namespace: case-platform-pgcc
             chartPath: helm/platform-backend
             releaseName: case-platform-pgcc-backend
             valuesPath: applications/domains/pgcc/backend/values.yaml
+            imageAlias: pgcc
+            imageRepository: ghcr.io/landrimarina/case-platform-pgcc-backend
+      template:
+        metadata:
+          annotations:
+            argocd-image-updater.argoproj.io/image-list: "{{ .imageAlias }}={{ .imageRepository }}"
+            argocd-image-updater.argoproj.io/{{ .imageAlias }}.update-strategy: digest
+            argocd-image-updater.argoproj.io/{{ .imageAlias }}.allow-tags: regexp:^latest$
+            argocd-image-updater.argoproj.io/{{ .imageAlias }}.helm.image-name: image.repository
+            argocd-image-updater.argoproj.io/{{ .imageAlias }}.helm.image-tag: image.tag
+            argocd-image-updater.argoproj.io/write-back-method: git
+            argocd-image-updater.argoproj.io/write-back-target: "helmvalues:{{ .valuesPath }}"
+    - list:
+        elements:
+          - appName: case-platform-anc-frontend
+            namespace: case-platform-anc
+            chartPath: helm/domain-application
+            releaseName: anc
+            valuesPath: applications/domains/anc/frontend/values.yaml
           - appName: case-platform-pgcc-frontend
             namespace: case-platform-pgcc
             chartPath: helm/domain-application
