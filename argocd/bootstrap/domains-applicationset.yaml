@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: case-platform-domains
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - list:
+        elements:
+          - appName: case-platform-anc-backend
+            namespace: case-platform-anc
+            chartPath: helm/platform-backend
+            releaseName: case-platform-anc-backend
+            valuesPath: applications/domains/anc/backend/values.yaml
+          - appName: case-platform-anc-frontend
+            namespace: case-platform-anc
+            chartPath: helm/domain-application
+            releaseName: anc
+            valuesPath: applications/domains/anc/frontend/values.yaml
+          - appName: case-platform-pgcc-backend
+            namespace: case-platform-pgcc
+            chartPath: helm/platform-backend
+            releaseName: case-platform-pgcc-backend
+            valuesPath: applications/domains/pgcc/backend/values.yaml
+          - appName: case-platform-pgcc-frontend
+            namespace: case-platform-pgcc
+            chartPath: helm/domain-application
+            releaseName: pgcc
+            valuesPath: applications/domains/pgcc/frontend/values.yaml
+  template:
+    metadata:
+      name: "{{ .appName }}"
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: case-platform
+      sources:
+        - repoURL: https://github.com/landrimarina/case-platform-gitops.git
+          targetRevision: develop
+          path: "{{ .chartPath }}"
+          helm:
+            releaseName: "{{ .releaseName }}"
+            valueFiles:
+              - "$values/{{ .valuesPath }}"
+        - repoURL: https://github.com/landrimarina/case-platform-gitops.git
+          targetRevision: develop
+          ref: values
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{ .namespace }}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

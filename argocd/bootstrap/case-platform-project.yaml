@@ -24,6 +24,8 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: case-platform-anc
       server: https://kubernetes.default.svc
+    - namespace: case-platform-pgcc
+      server: https://kubernetes.default.svc
     - namespace: apisix
       server: https://kubernetes.default.svc
 

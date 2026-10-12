@@ -10,3 +10,4 @@ resources:
   - apisix.yaml
   - bff.yaml
   - frontend.yaml
+  - domains-applicationset.yaml
